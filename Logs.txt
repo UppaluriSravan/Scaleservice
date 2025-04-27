@@ -1,0 +1,777 @@
+Microsoft Windows [Version 10.0.26100.3775]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ussra>cd OneDrive
+
+C:\Users\ussra\OneDrive>cd Desktop
+
+C:\Users\ussra\OneDrive\Desktop>cd Scaleservice
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>ls
+'ls' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube start
+* minikube v1.35.0 on Microsoft Windows 11 Home Single Language 10.0.26100.3775 Build 26100.3775
+* Automatically selected the docker driver. Other choices: hyperv, ssh
+* Using Docker Desktop driver with root privileges
+* Starting "minikube" primary control-plane node in "minikube" cluster
+* Pulling base image v0.0.46 ...
+* Downloading Kubernetes v1.32.0 preload ...
+    > preloaded-images-k8s-v18-v1...:  333.57 MiB / 333.57 MiB  100.00% 5.66 Mi
+    > gcr.io/k8s-minikube/kicbase...:  500.31 MiB / 500.31 MiB  100.00% 4.81 Mi
+* Creating docker container (CPUs=2, Memory=3900MB) ...
+! Failing to connect to https://registry.k8s.io/ from inside the minikube container
+* To pull new external images, you may need to configure a proxy: https://minikube.sigs.k8s.io/docs/reference/networking/proxy/
+* Preparing Kubernetes v1.32.0 on Docker 27.4.1 ...
+  - Generating certificates and keys ...
+  - Booting up control plane ...
+  - Configuring RBAC rules ...
+* Configuring bridge CNI (Container Networking Interface) ...
+* Verifying Kubernetes components...
+  - Using image gcr.io/k8s-minikube/storage-provisioner:v5
+* Enabled addons: storage-provisioner, default-storageclass
+* Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube docker-env
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://127.0.0.1:55732
+SET DOCKER_CERT_PATH=C:\Users\ussra\.minikube\certs
+SET MINIKUBE_ACTIVE_DOCKERD=minikube
+REM To point your shell to minikube's docker-daemon, run:
+REM @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>REM @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>@FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t product-service:latest ./product-service
+[+] Building 55.0s (11/11) FINISHED                                                                                                                                                               docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  2.8s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                                                                                           0.1s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                           43.8s
+ => => resolve docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => => sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e 6.41kB / 6.41kB                                                                                                              0.0s
+ => => sha256:de20d623379fc7c7ccf845a22c3153b920d57446ba7c8e64ba25d21a60b48ad6 6.39kB / 6.39kB                                                                                                              0.0s
+ => => sha256:23b7d26ef1d294256da0d70ce374277b9aab5ca683015073316005cb63d33849 48.49MB / 48.49MB                                                                                                           20.8s
+ => => sha256:aa6c239d30ee04dede270729f9502389b1a9546687ce656872536340ee0a9e03 2.49kB / 2.49kB                                                                                                              0.0s
+ => => sha256:07d1b5af933d2dfc3d0dd509d6e20534825e4a537f7b006a6cb5b8e5a1f20905 24.01MB / 24.01MB                                                                                                            9.4s
+ => => sha256:1eb98adba0eb44a2e4facf9ca3626a4a66feedd0dd56d159cca90a35205744e7 64.40MB / 64.40MB                                                                                                           26.8s
+ => => sha256:b617a119f8a27982374d94ec6eb3738ae3d38d6fc2c34c865813926cf596a621 211.33MB / 211.33MB                                                                                                         34.4s
+ => => sha256:ee496386c5de1ce84096ca486e1aabcdf7cb8f0afd5a9b4863dbf870b340744f 3.32kB / 3.32kB                                                                                                             21.1s
+ => => extracting sha256:23b7d26ef1d294256da0d70ce374277b9aab5ca683015073316005cb63d33849                                                                                                                   3.0s
+ => => sha256:058db40e534297246fb14bc4e107d2f6ddc140494a26793e1e90696cd6b2507a 45.68MB / 45.68MB                                                                                                           34.7s
+ => => extracting sha256:07d1b5af933d2dfc3d0dd509d6e20534825e4a537f7b006a6cb5b8e5a1f20905                                                                                                                   0.8s
+ => => extracting sha256:1eb98adba0eb44a2e4facf9ca3626a4a66feedd0dd56d159cca90a35205744e7                                                                                                                   4.1s
+ => => sha256:04deb1529fda049f44f9be8d16ca833a53961813ce07eda3cefd50cd3fd74880 1.25MB / 1.25MB                                                                                                             27.6s
+ => => sha256:3b3ca5178f3ece5f7e96b38b9c4b9c3a101a9d6777cf0f5c320f869512c80024 448B / 448B                                                                                                                 27.9s
+ => => extracting sha256:b617a119f8a27982374d94ec6eb3738ae3d38d6fc2c34c865813926cf596a621                                                                                                                   7.0s
+ => => extracting sha256:ee496386c5de1ce84096ca486e1aabcdf7cb8f0afd5a9b4863dbf870b340744f                                                                                                                   0.0s
+ => => extracting sha256:058db40e534297246fb14bc4e107d2f6ddc140494a26793e1e90696cd6b2507a                                                                                                                   1.9s
+ => => extracting sha256:04deb1529fda049f44f9be8d16ca833a53961813ce07eda3cefd50cd3fd74880                                                                                                                   0.0s
+ => => extracting sha256:3b3ca5178f3ece5f7e96b38b9c4b9c3a101a9d6777cf0f5c320f869512c80024                                                                                                                   0.0s
+ => [internal] load build context                                                                                                                                                                           0.6s
+ => => transferring context: 14.32MB                                                                                                                                                                        0.6s
+ => [2/5] WORKDIR /app                                                                                                                                                                                      0.2s
+ => [3/5] COPY package*.json ./                                                                                                                                                                             0.0s
+ => [4/5] RUN npm install                                                                                                                                                                                   2.1s
+ => [5/5] COPY . .                                                                                                                                                                                          0.6s
+ => exporting to image                                                                                                                                                                                      0.2s
+ => => exporting layers                                                                                                                                                                                     0.2s
+ => => writing image sha256:32c944088918a446c8cae3588d7460d746bcebab82c911ab2bbf7b865162c983                                                                                                                0.0s
+ => => naming to docker.io/library/product-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t order-service:latest ./order-service
+[+] Building 4.3s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  1.0s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.6s
+ => => transferring context: 14.32MB                                                                                                                                                                        0.6s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => [3/5] COPY package*.json ./                                                                                                                                                                             0.1s
+ => [4/5] RUN npm install                                                                                                                                                                                   2.3s
+ => [5/5] COPY . .                                                                                                                                                                                          0.3s
+ => exporting to image                                                                                                                                                                                      0.2s
+ => => exporting layers                                                                                                                                                                                     0.2s
+ => => writing image sha256:f1120586cf0d047fe6f518626dfdf3f3045b7b2e0ed3f22925013fb55028bbc8                                                                                                                0.0s
+ => => naming to docker.io/library/order-service:latest                                                                                                                                                     0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t user-service:latest ./user-service
+[+] Building 4.2s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.9s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.6s
+ => => transferring context: 14.32MB                                                                                                                                                                        0.5s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => [3/5] COPY package*.json ./                                                                                                                                                                             0.1s
+ => [4/5] RUN npm install                                                                                                                                                                                   2.3s
+ => [5/5] COPY . .                                                                                                                                                                                          0.4s
+ => exporting to image                                                                                                                                                                                      0.2s
+ => => exporting layers                                                                                                                                                                                     0.2s
+ => => writing image sha256:ebc2cb1a119ce0d58c9ce1fe670772329e650325c7932667e4035bdcf3b96153                                                                                                                0.0s
+ => => naming to docker.io/library/user-service:latest                                                                                                                                                      0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t payment-service:latest ./payment-service
+[+] Building 4.4s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.8s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.5s
+ => => transferring context: 14.32MB                                                                                                                                                                        0.5s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => [3/5] COPY package*.json ./                                                                                                                                                                             0.0s
+ => [4/5] RUN npm install                                                                                                                                                                                   2.0s
+ => [5/5] COPY . .                                                                                                                                                                                          0.3s
+ => exporting to image                                                                                                                                                                                      0.2s
+ => => exporting layers                                                                                                                                                                                     0.2s
+ => => writing image sha256:b709c1cbbd8637165eaa3005feaf99db0f97e3951362bc40ed674646285b005f                                                                                                                0.0s
+ => => naming to docker.io/library/payment-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f product-deployment.yaml
+deployment.apps/product-service created
+service/product-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f order-deployment.yaml
+deployment.apps/order-service created
+service/order-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f user-deployment.yaml
+deployment.apps/user-service created
+service/user-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f payment-deployment.yaml
+deployment.apps/payment-service created
+service/payment-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service product-service
+|-----------|-----------------|-------------|---------------------------|
+| NAMESPACE |      NAME       | TARGET PORT |            URL            |
+|-----------|-----------------|-------------|---------------------------|
+| default   | product-service |        4001 | http://192.168.49.2:30001 |
+|-----------|-----------------|-------------|---------------------------|
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service product-service found
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                             │
+│    * If the above advice does not help, please let us know:                                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                               │
+│                                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                    │
+│    * Please also attach the following file to the GitHub issue:                                             │
+│    * - C:\Users\ussra\AppData\Local\Temp\minikube_service_4db1508e08aefcc73def3149c21288b38044e9b6_0.log    │
+│                                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-pp2bw     0/1     ImagePullBackOff   0          2m31s
+payment-service-5f68c7f56b-vdlcw   0/1     ImagePullBackOff   0          2m24s
+product-service-6b6fbf4fcc-nqxh2   0/1     ImagePullBackOff   0          2m41s
+user-service-977d49c78-pqnqz       0/1     ImagePullBackOff   0          2m27s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get services
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+kubernetes        ClusterIP   10.96.0.1       <none>        443/TCP          7m19s
+order-service     NodePort    10.105.253.58   <none>        4002:30002/TCP   2m37s
+payment-service   NodePort    10.102.53.185   <none>        4004:30004/TCP   2m30s
+product-service   NodePort    10.107.112.79   <none>        4001:30001/TCP   2m47s
+user-service      NodePort    10.99.171.223   <none>        4003:30003/TCP   2m33s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service product-service
+|-----------|-----------------|-------------|---------------------------|
+| NAMESPACE |      NAME       | TARGET PORT |            URL            |
+|-----------|-----------------|-------------|---------------------------|
+| default   | product-service |        4001 | http://192.168.49.2:30001 |
+|-----------|-----------------|-------------|---------------------------|
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service product-service found
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                             │
+│    * If the above advice does not help, please let us know:                                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                               │
+│                                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                    │
+│    * Please also attach the following file to the GitHub issue:                                             │
+│    * - C:\Users\ussra\AppData\Local\Temp\minikube_service_4db1508e08aefcc73def3149c21288b38044e9b6_0.log    │
+│                                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service order-service
+|-----------|---------------|-------------|---------------------------|
+| NAMESPACE |     NAME      | TARGET PORT |            URL            |
+|-----------|---------------|-------------|---------------------------|
+| default   | order-service |        4002 | http://192.168.49.2:30002 |
+|-----------|---------------|-------------|---------------------------|
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service order-service found
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                             │
+│    * If the above advice does not help, please let us know:                                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                               │
+│                                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                    │
+│    * Please also attach the following file to the GitHub issue:                                             │
+│    * - C:\Users\ussra\AppData\Local\Temp\minikube_service_39d0e68a37e2ff3a0eaf3fe6227e226670da5b9f_0.log    │
+│                                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service user-service
+|-----------|--------------|-------------|---------------------------|
+| NAMESPACE |     NAME     | TARGET PORT |            URL            |
+|-----------|--------------|-------------|---------------------------|
+| default   | user-service |        4003 | http://192.168.49.2:30003 |
+|-----------|--------------|-------------|---------------------------|
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service user-service found
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                             │
+│    * If the above advice does not help, please let us know:                                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                               │
+│                                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                    │
+│    * Please also attach the following file to the GitHub issue:                                             │
+│    * - C:\Users\ussra\AppData\Local\Temp\minikube_service_ea556c0c026b54c5980339e7c3c5a1242df4d120_0.log    │
+│                                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service payment-service
+|-----------|-----------------|-------------|---------------------------|
+| NAMESPACE |      NAME       | TARGET PORT |            URL            |
+|-----------|-----------------|-------------|---------------------------|
+| default   | payment-service |        4004 | http://192.168.49.2:30004 |
+|-----------|-----------------|-------------|---------------------------|
+
+X Exiting due to SVC_UNREACHABLE: service not available: no running pod for service payment-service found
+*
+╭─────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                             │
+│    * If the above advice does not help, please let us know:                                                 │
+│      https://github.com/kubernetes/minikube/issues/new/choose                                               │
+│                                                                                                             │
+│    * Please run `minikube logs --file=logs.txt` and attach logs.txt to the GitHub issue.                    │
+│    * Please also attach the following file to the GitHub issue:                                             │
+│    * - C:\Users\ussra\AppData\Local\Temp\minikube_service_52cf0cca0b7790f58b0e4e56c43aa6d93d16aefc_0.log    │
+│                                                                                                             │
+╰─────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-pp2bw     0/1     ImagePullBackOff   0          4m7s
+payment-service-5f68c7f56b-vdlcw   0/1     ImagePullBackOff   0          4m
+product-service-6b6fbf4fcc-nqxh2   0/1     ImagePullBackOff   0          4m17s
+user-service-977d49c78-pqnqz       0/1     ErrImagePull       0          4m3s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube docker-env
+SET DOCKER_TLS_VERIFY=1
+SET DOCKER_HOST=tcp://127.0.0.1:55732
+SET DOCKER_CERT_PATH=C:\Users\ussra\.minikube\certs
+SET MINIKUBE_ACTIVE_DOCKERD=minikube
+REM To point your shell to minikube's docker-daemon, run:
+REM @FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>@FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env --shell cmd') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t payment-service:latest ./payment-service
+[+] Building 1.8s (11/11) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  1.4s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:b709c1cbbd8637165eaa3005feaf99db0f97e3951362bc40ed674646285b005f                                                                                                                0.0s
+ => => naming to docker.io/library/payment-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t order-service:latest ./order-service
+[+] Building 1.0s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.7s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:f1120586cf0d047fe6f518626dfdf3f3045b7b2e0ed3f22925013fb55028bbc8                                                                                                                0.0s
+ => => naming to docker.io/library/order-service:latest                                                                                                                                                     0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t product-service:latest ./product-service
+[+] Building 0.5s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:32c944088918a446c8cae3588d7460d746bcebab82c911ab2bbf7b865162c983                                                                                                                0.0s
+ => => naming to docker.io/library/product-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t user-service:latest ./user-service
+[+] Building 0.5s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:ebc2cb1a119ce0d58c9ce1fe670772329e650325c7932667e4035bdcf3b96153                                                                                                                0.0s
+ => => naming to docker.io/library/user-service:latest                                                                                                                                                      0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f payment-deployment.yaml
+deployment.apps "payment-service" deleted
+service "payment-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f order-deployment.yaml
+deployment.apps "order-service" deleted
+service "order-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f product-deployment.yaml
+deployment.apps "product-service" deleted
+service "product-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f user-deployment.yaml
+deployment.apps "user-service" deleted
+service "user-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f payment-deployment.yaml
+deployment.apps/payment-service created
+service/payment-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f order-deployment.yaml
+deployment.apps/order-service created
+service/order-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f product-deployment.yaml
+deployment.apps/product-service created
+service/product-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f user-deployment.yaml
+deployment.apps/user-service created
+service/user-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS              RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff    0          14s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff    0          20s
+product-service-6b6fbf4fcc-b59tr   0/1     ErrImagePull        0          10s
+user-service-977d49c78-74mrs       0/1     ContainerCreating   0          5s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff   0          47s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff   0          53s
+product-service-6b6fbf4fcc-b59tr   0/1     ImagePullBackOff   0          43s
+user-service-977d49c78-74mrs       0/1     ErrImagePull       0          38s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff   0          54s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff   0          60s
+product-service-6b6fbf4fcc-b59tr   0/1     ImagePullBackOff   0          50s
+user-service-977d49c78-74mrs       0/1     ErrImagePull       0          45s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff   0          55s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff   0          61s
+product-service-6b6fbf4fcc-b59tr   0/1     ImagePullBackOff   0          51s
+user-service-977d49c78-74mrs       0/1     ErrImagePull       0          46s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>@FOR /f "tokens=*" %i IN ('minikube -p minikube docker-env') DO @%i
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff   0          78s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff   0          84s
+product-service-6b6fbf4fcc-b59tr   0/1     ErrImagePull       0          74s
+user-service-977d49c78-74mrs       0/1     ImagePullBackOff   0          69s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-fcvft     0/1     ImagePullBackOff   0          90s
+payment-service-5f68c7f56b-5p686   0/1     ImagePullBackOff   0          96s
+product-service-6b6fbf4fcc-b59tr   0/1     ImagePullBackOff   0          86s
+user-service-977d49c78-74mrs       0/1     ErrImagePull       0          81s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>& minikube -p minikube docker-env | Invoke-Expression
+& was unexpected at this time.
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t product-service:latest ./product-service
+[+] Building 1.0s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.8s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:32c944088918a446c8cae3588d7460d746bcebab82c911ab2bbf7b865162c983                                                                                                                0.0s
+ => => naming to docker.io/library/product-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t order-service:latest ./order-service
+[+] Building 0.6s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:f1120586cf0d047fe6f518626dfdf3f3045b7b2e0ed3f22925013fb55028bbc8                                                                                                                0.0s
+ => => naming to docker.io/library/order-service:latest                                                                                                                                                     0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t user-service:latest ./user-service
+[+] Building 0.5s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:ebc2cb1a119ce0d58c9ce1fe670772329e650325c7932667e4035bdcf3b96153                                                                                                                0.0s
+ => => naming to docker.io/library/user-service:latest                                                                                                                                                      0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t payment-service:latest ./payment-service
+[+] Building 0.5s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:b709c1cbbd8637165eaa3005feaf99db0f97e3951362bc40ed674646285b005f                                                                                                                0.0s
+ => => naming to docker.io/library/payment-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f product-deployment.yaml
+deployment.apps "product-service" deleted
+service "product-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f order-deployment.yaml
+deployment.apps "order-service" deleted
+service "order-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f user-deployment.yaml
+deployment.apps "user-service" deleted
+service "user-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl delete -f payment-deployment.yaml
+deployment.apps "payment-service" deleted
+service "payment-service" deleted
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f product-deployment.yaml
+deployment.apps/product-service created
+service/product-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f order-deployment.yaml
+deployment.apps/order-service created
+service/order-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f user-deployment.yaml
+deployment.apps/user-service created
+service/user-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f payment-deployment.yaml
+deployment.apps/payment-service created
+service/payment-service created
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS              RESTARTS   AGE
+order-service-75ff6f6796-qwtld     0/1     ContainerCreating   0          5s
+payment-service-5f68c7f56b-cn6pv   0/1     ContainerCreating   0          4s
+product-service-6b6fbf4fcc-rg9gx   0/1     ErrImagePull        0          5s
+user-service-977d49c78-qbjmc       0/1     ContainerCreating   0          5s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS             RESTARTS   AGE
+order-service-75ff6f6796-qwtld     0/1     ImagePullBackOff   0          21s
+payment-service-5f68c7f56b-cn6pv   0/1     ErrImagePull       0          20s
+product-service-6b6fbf4fcc-rg9gx   0/1     ImagePullBackOff   0          21s
+user-service-977d49c78-qbjmc       0/1     ErrImagePull       0          21s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker login
+Authenticating with existing credentials... [Username: sravan1327]
+
+i Info → To login with a different account, run 'docker logout' followed by 'docker login'
+
+
+Login Succeeded
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t sravan1327/product-service:latest ./product-service
+[+] Building 1.8s (11/11) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  1.5s
+ => [auth] library/node:pull token for registry-1.docker.io                                                                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:32c944088918a446c8cae3588d7460d746bcebab82c911ab2bbf7b865162c983                                                                                                                0.0s
+ => => naming to docker.io/sravan1327/product-service:latest                                                                                                                                                0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t sravan1327/order-service:latest ./order-service
+[+] Building 1.0s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.7s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:f1120586cf0d047fe6f518626dfdf3f3045b7b2e0ed3f22925013fb55028bbc8                                                                                                                0.0s
+ => => naming to docker.io/sravan1327/order-service:latest                                                                                                                                                  0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t sravan1327/user-service:latest ./user-service
+[+] Building 0.5s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.74kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:ebc2cb1a119ce0d58c9ce1fe670772329e650325c7932667e4035bdcf3b96153                                                                                                                0.0s
+ => => naming to docker.io/sravan1327/user-service:latest                                                                                                                                                   0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker build -t sravan1327/payment-service:latest ./payment-service
+[+] Building 0.6s (10/10) FINISHED                                                                                                                                                                docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                                        0.0s
+ => => transferring dockerfile: 182B                                                                                                                                                                        0.0s
+ => [internal] load metadata for docker.io/library/node:18                                                                                                                                                  0.3s
+ => [internal] load .dockerignore                                                                                                                                                                           0.0s
+ => => transferring context: 2B                                                                                                                                                                             0.0s
+ => [1/5] FROM docker.io/library/node:18@sha256:df9fa4e0e39c9b97e30240b5bb1d99bdb861573a82002b2c52ac7d6b8d6d773e                                                                                            0.0s
+ => [internal] load build context                                                                                                                                                                           0.1s
+ => => transferring context: 132.75kB                                                                                                                                                                       0.1s
+ => CACHED [2/5] WORKDIR /app                                                                                                                                                                               0.0s
+ => CACHED [3/5] COPY package*.json ./                                                                                                                                                                      0.0s
+ => CACHED [4/5] RUN npm install                                                                                                                                                                            0.0s
+ => CACHED [5/5] COPY . .                                                                                                                                                                                   0.0s
+ => exporting to image                                                                                                                                                                                      0.0s
+ => => exporting layers                                                                                                                                                                                     0.0s
+ => => writing image sha256:b709c1cbbd8637165eaa3005feaf99db0f97e3951362bc40ed674646285b005f                                                                                                                0.0s
+ => => naming to docker.io/sravan1327/payment-service:latest                                                                                                                                                0.0s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker push sravan1327/product-service:latest
+The push refers to repository [docker.io/sravan1327/product-service]
+0b57d2e67a38: Pushed
+18aa3e958bba: Pushed
+b9c850144ec4: Pushed
+d396095f75fd: Pushed
+46dec0992c2d: Mounted from library/node
+659ae354f8ac: Mounted from library/node
+07f183d69b10: Mounted from library/node
+adab8b21d9fe: Mounted from library/node
+6c7c1b88da61: Mounted from library/node
+b2bcbd8ebb2b: Mounted from library/node
+7f0053786e6e: Mounted from library/node
+f7f2b929d8a5: Mounted from library/node
+latest: digest: sha256:caa8a3c5346731757cb9a367247d6f480b1a543413ce9cf50207033885152032 size: 2841
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker push sravan1327/order-service:latest
+The push refers to repository [docker.io/sravan1327/order-service]
+3cf4a8f39fe7: Pushed
+963e6e86fbec: Pushed
+c769f3a67bb8: Pushed
+d396095f75fd: Mounted from sravan1327/product-service
+46dec0992c2d: Mounted from sravan1327/product-service
+659ae354f8ac: Mounted from sravan1327/product-service
+07f183d69b10: Mounted from sravan1327/product-service
+adab8b21d9fe: Mounted from sravan1327/product-service
+6c7c1b88da61: Mounted from sravan1327/product-service
+b2bcbd8ebb2b: Mounted from sravan1327/product-service
+7f0053786e6e: Mounted from sravan1327/product-service
+f7f2b929d8a5: Mounted from sravan1327/product-service
+latest: digest: sha256:8b95be40c3abaf7e3f8a195478a8abba17abf28a18ab5ee9adb1bb0168706a3b size: 2841
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker push sravan1327/user-service:latest
+The push refers to repository [docker.io/sravan1327/user-service]
+e0339e12dbe5: Pushed
+ddf8c4516820: Pushed
+c2308cf98118: Pushed
+d396095f75fd: Mounted from sravan1327/order-service
+46dec0992c2d: Mounted from sravan1327/order-service
+659ae354f8ac: Mounted from sravan1327/order-service
+07f183d69b10: Mounted from sravan1327/order-service
+adab8b21d9fe: Mounted from sravan1327/order-service
+6c7c1b88da61: Mounted from sravan1327/order-service
+b2bcbd8ebb2b: Mounted from sravan1327/order-service
+7f0053786e6e: Mounted from sravan1327/order-service
+f7f2b929d8a5: Mounted from sravan1327/order-service
+latest: digest: sha256:49c02b58d35bb90ed849ef16c8e16a71c1f165a40c9a887db5aa4d5091150372 size: 2841
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>docker push sravan1327/payment-service:latest
+The push refers to repository [docker.io/sravan1327/payment-service]
+5ba4491c6770: Pushed
+c5a05284fd71: Pushed
+aad6d6bafda1: Pushed
+d396095f75fd: Mounted from sravan1327/user-service
+46dec0992c2d: Mounted from sravan1327/user-service
+659ae354f8ac: Mounted from sravan1327/user-service
+07f183d69b10: Mounted from sravan1327/user-service
+adab8b21d9fe: Mounted from sravan1327/user-service
+6c7c1b88da61: Mounted from sravan1327/user-service
+b2bcbd8ebb2b: Mounted from sravan1327/user-service
+7f0053786e6e: Mounted from sravan1327/user-service
+f7f2b929d8a5: Mounted from sravan1327/user-service
+latest: digest: sha256:81175f0f7b781c8997b0cc338bb813885e56260b88ddea247c5b613f697882ac size: 2841
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f product-deployment.yaml
+deployment.apps/product-service configured
+service/product-service unchanged
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f order-deployment.yaml
+deployment.apps/order-service configured
+service/order-service unchanged
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f user-deployment.yaml
+deployment.apps/user-service configured
+service/user-service unchanged
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl apply -f payment-deployment.yaml
+deployment.apps/payment-service configured
+service/payment-service unchanged
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS              RESTARTS   AGE
+order-service-54746767d9-8p2ps     1/1     Running             0          9s
+payment-service-5f68c7f56b-cn6pv   0/1     ImagePullBackOff    0          7m15s
+payment-service-864f994d4c-75dpv   0/1     ContainerCreating   0          8s
+product-service-cbf8c549b-8ghjr    1/1     Running             0          10s
+user-service-5669c97fc-58lpr       1/1     Running             0          9s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get pods
+NAME                               READY   STATUS    RESTARTS   AGE
+order-service-54746767d9-8p2ps     1/1     Running   0          34s
+payment-service-864f994d4c-75dpv   1/1     Running   0          33s
+product-service-cbf8c549b-8ghjr    1/1     Running   0          35s
+user-service-5669c97fc-58lpr       1/1     Running   0          34s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>kubectl get services
+NAME              TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+kubernetes        ClusterIP   10.96.0.1        <none>        443/TCP          21m
+order-service     NodePort    10.96.226.94     <none>        4002:30002/TCP   8m1s
+payment-service   NodePort    10.106.45.32     <none>        4004:30004/TCP   8m
+product-service   NodePort    10.107.140.148   <none>        4001:30001/TCP   8m1s
+user-service      NodePort    10.99.214.174    <none>        4003:30003/TCP   8m1s
+
+C:\Users\ussra\OneDrive\Desktop\Scaleservice>minikube service product-service
+|-----------|-----------------|-------------|---------------------------|
+| NAMESPACE |      NAME       | TARGET PORT |            URL            |
+|-----------|-----------------|-------------|---------------------------|
+| default   | product-service |        4001 | http://192.168.49.2:30001 |
+|-----------|-----------------|-------------|---------------------------|
+* Starting tunnel for service product-service.
+|-----------|-----------------|-------------|------------------------|
+| NAMESPACE |      NAME       | TARGET PORT |          URL           |
+|-----------|-----------------|-------------|------------------------|
+| default   | product-service |             | http://127.0.0.1:56946 |
+|-----------|-----------------|-------------|------------------------|
+* Opening service default/product-service in default browser...
+! Because you are using a Docker driver on windows, the terminal needs to be open to run it.
