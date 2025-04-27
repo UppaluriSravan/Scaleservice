@@ -1,0 +1,52 @@
+version: "3.8"
+services:
+  product-service:
+    build: ./product-service
+    ports:
+      - "4001:4001"
+    environment:
+      - PORT=4001
+      - MONGO_URL=mongodb+srv://ussravanu:B9Nxyvzpon2S6UKF@cluster0.u73skvt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "4002:4002"
+    environment:
+      - PORT=4002
+      - MONGO_URL=mongodb+srv://ussravanu:kWfNfEcSOT34hBSm@cluster0.sdskfhy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "4003:4003"
+    environment:
+      - PORT=4003
+      - MONGO_URL=mongodb+srv://ussravanu:bCiHEHJJc0K1utPY@cluster0.cqfet7b.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+
+  payment-service:
+    build: ./payment-service
+    ports:
+      - "4004:4004"
+    environment:
+      - PORT=4004
+      - MONGO_URL=mongodb+srv://ussravanu:YmhSrOELQRuV74cU@cluster0.r6tnwaq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

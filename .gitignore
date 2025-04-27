@@ -1,0 +1,28 @@
+# Node
+node_modules/
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker
+*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# VSCode
+.vscode/
+
+# Others
+coverage/
+dist/
+
+# Ignore MongoDB data if any
+mongo_data/
