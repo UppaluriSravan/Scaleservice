@@ -1,5 +1,6 @@
 const express = require("express");
 const Order = require("../models/order");
+const axios = require("axios"); // Added for interservice communication
 const router = express.Router();
 
 // Create an order
@@ -7,6 +8,20 @@ router.post("/", async (req, res) => {
   try {
     const order = new Order(req.body);
     await order.save();
+
+    // Interservice call to payment-service
+    try {
+      await axios.post("http://payment-service:4004/api/payments", {
+        orderId: order._id,
+        userId: order.userId,
+        amount: order.total,
+        method: req.body.method || "card", // Default to 'card' if not provided
+      });
+    } catch (paymentErr) {
+      // Log payment service error but do not block order creation
+      console.error("Payment service error:", paymentErr.message);
+    }
+
     res.status(201).json(order);
   } catch (err) {
     res.status(400).json({error: err.message});

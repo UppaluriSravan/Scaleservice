@@ -1,12 +1,46 @@
 const express = require("express");
 const Payment = require("../models/payment");
+const amqp = require("amqplib"); // For RabbitMQ
+const axios = require("axios"); // For order validation
 const router = express.Router();
+
+// Helper to publish message to RabbitMQ
+async function publishPaymentApproved(orderId) {
+  try {
+    const conn = await amqp.connect("amqp://rabbitmq:5672");
+    const channel = await conn.createChannel();
+    const queue = "payment_approved";
+    await channel.assertQueue(queue, {durable: false});
+    channel.sendToQueue(queue, Buffer.from(JSON.stringify({orderId})));
+    setTimeout(() => {
+      channel.close();
+      conn.close();
+    }, 500);
+  } catch (err) {
+    console.error("RabbitMQ publish error:", err.message);
+  }
+}
 
 // Create a payment
 router.post("/", async (req, res) => {
   try {
+    // Validate order existence
+    const orderServiceUrl = `http://order-service:4002/api/orders/${req.body.orderId}`;
+    let orderResponse;
+    try {
+      orderResponse = await axios.get(orderServiceUrl);
+    } catch (orderErr) {
+      return res
+        .status(404)
+        .json({error: "Order not found. Payment not processed."});
+    }
+
+    // Proceed if order exists
     const payment = new Payment(req.body);
+    payment.status = "approved"; // Immediately approve for demo
     await payment.save();
+    // Publish to payment_approved queue
+    publishPaymentApproved(payment.orderId);
     res.status(201).json(payment);
   } catch (err) {
     res.status(400).json({error: err.message});
