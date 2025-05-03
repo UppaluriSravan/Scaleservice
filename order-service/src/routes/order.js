@@ -6,6 +6,16 @@ const router = express.Router();
 // Create an order
 router.post("/", async (req, res) => {
   try {
+    // User validation: check if user exists in user-service
+    const userServiceUrl = `http://user-service:4003/api/users/${req.body.userId}`;
+    try {
+      await axios.get(userServiceUrl);
+    } catch (userErr) {
+      return res
+        .status(404)
+        .json({error: "User not found. Order not created."});
+    }
+
     const order = new Order(req.body);
     await order.save();
 

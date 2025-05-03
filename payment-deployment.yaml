@@ -15,6 +15,7 @@ spec:
       containers:
         - name: payment-service
           image: sravan1327/payment-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 4004
           env:
@@ -22,6 +23,13 @@ spec:
               value: "4004"
             - name: MONGO_URL
               value: "mongodb+srv://ussravanu:YmhSrOELQRuV74cU@cluster0.r6tnwaq.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -35,3 +43,4 @@ spec:
     - port: 4004
       targetPort: 4004
       nodePort: 30004
+      protocol: TCP

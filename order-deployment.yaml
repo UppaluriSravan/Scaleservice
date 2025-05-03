@@ -15,6 +15,7 @@ spec:
       containers:
         - name: order-service
           image: sravan1327/order-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 4002
           env:
@@ -22,6 +23,13 @@ spec:
               value: "4002"
             - name: MONGO_URL
               value: "mongodb+srv://ussravanu:kWfNfEcSOT34hBSm@cluster0.sdskfhy.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -35,3 +43,4 @@ spec:
     - port: 4002
       targetPort: 4002
       nodePort: 30002
+      protocol: TCP
